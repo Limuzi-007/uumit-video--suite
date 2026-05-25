@@ -1,0 +1,234 @@
+{
+  "$schema": "https://spec.uumit.com/agent-card/v1",
+  "name": "Video Editing Suite",
+  "description": "一站式 AI 视频剪辑 API：自动加字幕、语音转文字、去口播停顿、高光提取、横转竖、加水印/去水印、压缩、拆帧。适合短视频创作者、内容运营、跨境 TikTok 团队。",
+  "version": "1.0.0",
+  "author": {
+    "name": "Your Name"
+  },
+  "capabilities": [
+    {
+      "id": "subtitle_generate",
+      "name": "自动生成字幕",
+      "description": "上传视频，自动语音识别生成 SRT/VTT 字幕文件，支持中英日韩，可选直接嵌入视频。",
+      "input": {
+        "type": "video/*",
+        "max_size": "500MB"
+      },
+      "output": {
+        "type": "application/x-subrip",
+        "format": "srt"
+      },
+      "pricing": {
+        "type": "per_unit",
+        "unit": "minute",
+        "price": 0.5,
+        "currency": "UT"
+      }
+    },
+    {
+      "id": "subtitle_translate",
+      "name": "字幕翻译",
+      "description": "将字幕文件翻译为目标语言，支持中英互译。",
+      "input": {
+        "type": "text/plain",
+        "format": "srt"
+      },
+      "output": {
+        "type": "text/plain",
+        "format": "srt"
+      },
+      "pricing": {
+        "type": "per_unit",
+        "unit": "minute",
+        "price": 0.3,
+        "currency": "UT"
+      }
+    },
+    {
+      "id": "transcript",
+      "name": "视频转文字",
+      "description": "将视频/音频转为逐字稿，带时间轴分段，支持多语言。",
+      "input": {
+        "type": "video/*",
+        "max_size": "500MB"
+      },
+      "output": {
+        "type": "application/json"
+      },
+      "pricing": {
+        "type": "per_unit",
+        "unit": "minute",
+        "price": 0.3,
+        "currency": "UT"
+      }
+    },
+    {
+      "id": "silence_removal",
+      "name": "去口播停顿",
+      "description": "自动检测并删除视频中的静音片段，输出流畅版本。",
+      "input": {
+        "type": "video/*"
+      },
+      "output": {
+        "type": "video/mp4"
+      },
+      "pricing": {
+        "type": "per_unit",
+        "unit": "minute",
+        "price": 0.5,
+        "currency": "UT"
+      }
+    },
+    {
+      "id": "highlight",
+      "name": "高光提取",
+      "description": "自动检测视频中的高光（精彩）片段，拼接成精华短视频。",
+      "input": {
+        "type": "video/*"
+      },
+      "output": {
+        "type": "video/mp4"
+      },
+      "pricing": {
+        "type": "per_unit",
+        "unit": "video",
+        "price": 1.0,
+        "currency": "UT"
+      }
+    },
+    {
+      "id": "crop_portrait",
+      "name": "横转竖",
+      "description": "将横屏视频裁剪为 9:16 / 4:5 / 1:1 竖屏格式，适合抖音/小红书/Reels/Shorts。",
+      "input": {
+        "type": "video/*"
+      },
+      "output": {
+        "type": "video/mp4"
+      },
+      "pricing": {
+        "type": "per_unit",
+        "unit": "minute",
+        "price": 0.3,
+        "currency": "UT"
+      }
+    },
+    {
+      "id": "watermark",
+      "name": "加水印/去水印",
+      "description": "给视频加文字或图片水印，或 AI 去除视频水印。",
+      "input": {
+        "type": "video/*"
+      },
+      "output": {
+        "type": "video/mp4"
+      },
+      "pricing": {
+        "type": "per_unit",
+        "unit": "minute",
+        "price": 0.2,
+        "currency": "UT"
+      }
+    },
+    {
+      "id": "compress",
+      "name": "视频压缩",
+      "description": "压缩视频体积，支持 H.264/H.265/VP9，可调整分辨率和码率。",
+      "input": {
+        "type": "video/*"
+      },
+      "output": {
+        "type": "video/mp4"
+      },
+      "pricing": {
+        "type": "per_unit",
+        "unit": "minute",
+        "price": 0.3,
+        "currency": "UT"
+      }
+    },
+    {
+      "id": "frames",
+      "name": "视频拆帧",
+      "description": "从视频中按帧率/间隔提取图片，返回压缩包。",
+      "input": {
+        "type": "video/*"
+      },
+      "output": {
+        "type": "application/zip"
+      },
+      "pricing": {
+        "type": "per_unit",
+        "unit": "100_frames",
+        "price": 0.2,
+        "currency": "UT"
+      }
+    }
+  ],
+  "protocols": ["rest", "mcp"],
+  "mcp_endpoints": {
+    "subtitle_generate": {
+      "url": "https://your-domain.com/v1/subtitle/generate",
+      "method": "POST",
+      "content_type": "multipart/form-data"
+    },
+    "subtitle_translate": {
+      "url": "https://your-domain.com/v1/subtitle/translate",
+      "method": "POST",
+      "content_type": "multipart/form-data"
+    },
+    "transcript": {
+      "url": "https://your-domain.com/v1/transcript",
+      "method": "POST",
+      "content_type": "multipart/form-data"
+    },
+    "silence_remove": {
+      "url": "https://your-domain.com/v1/silence/remove",
+      "method": "POST",
+      "content_type": "multipart/form-data"
+    },
+    "highlight_extract": {
+      "url": "https://your-domain.com/v1/highlight/extract",
+      "method": "POST",
+      "content_type": "multipart/form-data"
+    },
+    "crop_portrait": {
+      "url": "https://your-domain.com/v1/crop/portrait",
+      "method": "POST",
+      "content_type": "multipart/form-data"
+    },
+    "watermark_add_text": {
+      "url": "https://your-domain.com/v1/watermark/add-text",
+      "method": "POST",
+      "content_type": "multipart/form-data"
+    },
+    "watermark_add_image": {
+      "url": "https://your-domain.com/v1/watermark/add-image",
+      "method": "POST",
+      "content_type": "multipart/form-data"
+    },
+    "watermark_remove": {
+      "url": "https://your-domain.com/v1/watermark/remove",
+      "method": "POST",
+      "content_type": "multipart/form-data"
+    },
+    "compress": {
+      "url": "https://your-domain.com/v1/compress",
+      "method": "POST",
+      "content_type": "multipart/form-data"
+    },
+    "frames_extract": {
+      "url": "https://your-domain.com/v1/frames/extract",
+      "method": "POST",
+      "content_type": "multipart/form-data"
+    }
+  },
+  "tags": ["video", "editing", "subtitle", "AI", "short-video", "tiktok", "content-creation"],
+  "languages": ["zh", "en", "ja", "ko"],
+  "compute_requirements": {
+    "gpu_recommended": true,
+    "min_ram_gb": 4,
+    "min_disk_gb": 10
+  }
+}

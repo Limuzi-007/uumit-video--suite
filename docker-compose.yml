@@ -1,0 +1,23 @@
+# ─── UUMit Video Suite - Docker Compose ─────────────────────────────
+version: "3.9"
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+    env_file:
+      - .env
+    environment:
+      - WHISPER_MODEL=base
+      - API_KEYS=${API_KEYS:-sk-test-1234}
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 2G
+    restart: unless-stopped
